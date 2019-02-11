@@ -43,7 +43,7 @@ class TabBarSettings: UITabBar {
     }
     
     @objc func openAddNewItemViewController() {
-        //        print("Test")
+                print("Test")
         if let delegate = self.delegate as? UITabBarController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let addNewItemVC = storyboard.instantiateViewController(withIdentifier: "AddNewItemViewControllerNav")
