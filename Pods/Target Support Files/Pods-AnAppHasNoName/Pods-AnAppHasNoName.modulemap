@@ -1,0 +1,6 @@
+framework module Pods_AnAppHasNoName {
+  umbrella header "Pods-AnAppHasNoName-umbrella.h"
+
+  export *
+  module * { export * }
+}
