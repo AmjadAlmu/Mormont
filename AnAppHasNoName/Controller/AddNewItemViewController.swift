@@ -10,6 +10,8 @@ import UIKit
 
 class AddNewItemViewController: UIViewController {
 
+    @IBOutlet weak var stepIndicatorView: StepIndicatorView!
+    @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 

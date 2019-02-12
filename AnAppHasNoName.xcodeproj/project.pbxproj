@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		37358DFFACD0B500BA244E60 /* Pods_AnAppHasNoName.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05707DBBB2163B40440DDE18 /* Pods_AnAppHasNoName.framework */; };
 		954F3598220F5B42003943CB /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F3597220F5B42003943CB /* AddNewItemViewController.swift */; };
+		954F35AF22136EDA003943CB /* StepIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F35AE22136EDA003943CB /* StepIndicatorView.swift */; };
+		954F35B122136EED003943CB /* AnnularLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F35B022136EED003943CB /* AnnularLayer.swift */; };
+		954F35B322136EF6003943CB /* LineLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F35B222136EF6003943CB /* LineLayer.swift */; };
+		954F35B522136EFE003943CB /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 954F35B422136EFE003943CB /* Media.xcassets */; };
 		F1399D022184651400536ECE /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D012184651400536ECE /* MenuBarCollectionViewCell.swift */; };
 		F1399D042185489800536ECE /* TabBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D032185489800536ECE /* TabBarSettings.swift */; };
 		F1399D242185609C00536ECE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D232185609C00536ECE /* ProfileViewController.swift */; };
@@ -33,6 +37,10 @@
 		05707DBBB2163B40440DDE18 /* Pods_AnAppHasNoName.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnAppHasNoName.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D3974D5B928BC0C9A6872DA /* Pods-AnAppHasNoName.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnAppHasNoName.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnAppHasNoName/Pods-AnAppHasNoName.debug.xcconfig"; sourceTree = "<group>"; };
 		954F3597220F5B42003943CB /* AddNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
+		954F35AE22136EDA003943CB /* StepIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepIndicatorView.swift; sourceTree = "<group>"; };
+		954F35B022136EED003943CB /* AnnularLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnularLayer.swift; sourceTree = "<group>"; };
+		954F35B222136EF6003943CB /* LineLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineLayer.swift; sourceTree = "<group>"; };
+		954F35B422136EFE003943CB /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		A05DD11AC4E5154E09203885 /* Pods-AnAppHasNoName.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnAppHasNoName.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnAppHasNoName/Pods-AnAppHasNoName.release.xcconfig"; sourceTree = "<group>"; };
 		F1399D012184651400536ECE /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1399D032185489800536ECE /* TabBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSettings.swift; sourceTree = "<group>"; };
@@ -85,6 +93,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		954F35B622136F59003943CB /* StepIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				954F35AE22136EDA003943CB /* StepIndicatorView.swift */,
+				954F35B022136EED003943CB /* AnnularLayer.swift */,
+				954F35B222136EF6003943CB /* LineLayer.swift */,
+				954F35B422136EFE003943CB /* Media.xcassets */,
+			);
+			path = StepIndicator;
+			sourceTree = "<group>";
+		};
 		F1446016217FFF8000EA6973 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +132,7 @@
 				F14460392180082900EA6973 /* Model */,
 				F14460362180076F00EA6973 /* View */,
 				F1446037218007D500EA6973 /* Controller */,
+				954F35B622136F59003943CB /* StepIndicator */,
 				F14460442182DCBA00EA6973 /* Helpers */,
 				F1446029217FFF8500EA6973 /* Assets.xcassets */,
 				F144602B217FFF8500EA6973 /* LaunchScreen.storyboard */,
@@ -222,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				954F35B522136EFE003943CB /* Media.xcassets in Resources */,
 				F144602D217FFF8500EA6973 /* LaunchScreen.storyboard in Resources */,
 				F1446035218001A300EA6973 /* GoogleService-Info.plist in Resources */,
 				F144602A217FFF8500EA6973 /* Assets.xcassets in Resources */,
@@ -284,9 +305,12 @@
 				F14460432182D4B700EA6973 /* HomeViewController.swift in Sources */,
 				F1446023217FFF8000EA6973 /* AppDelegate.swift in Sources */,
 				F1B0557F21E30D1D000C50A5 /* ServerManger.swift in Sources */,
+				954F35B122136EED003943CB /* AnnularLayer.swift in Sources */,
 				F1399D242185609C00536ECE /* ProfileViewController.swift in Sources */,
 				F14460412181CCAC00EA6973 /* Config.swift in Sources */,
 				F1399D022184651400536ECE /* MenuBarCollectionViewCell.swift in Sources */,
+				954F35B322136EF6003943CB /* LineLayer.swift in Sources */,
+				954F35AF22136EDA003943CB /* StepIndicatorView.swift in Sources */,
 				F14460462182DCDA00EA6973 /* Extension.swift in Sources */,
 				F1399D042185489800536ECE /* TabBarSettings.swift in Sources */,
 				954F3598220F5B42003943CB /* AddNewItemViewController.swift in Sources */,
