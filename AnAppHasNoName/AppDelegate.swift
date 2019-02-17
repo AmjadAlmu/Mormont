@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Remove the bottom line of NavigationBar
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        
         FirebaseApp.configure()
         return true
     }
