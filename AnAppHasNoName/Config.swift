@@ -15,8 +15,8 @@ struct Config {
     static let MANAGE_USERS_ENDPOINT = "Users"
     
     //MARK: - Application Colors
-    static let MAIN_COLOR = UIColor(hexString: "a09fed")
-    static let SECONDARY_COLOR = UIColor(hexString: "c6caf7")
+    static let MAIN_COLOR = UIColor(red:0.63, green:0.62, blue:0.93, alpha:1.0)
+    static let SECONDARY_COLOR = UIColor(red:0.78, green:0.79, blue:0.97, alpha:1.0)
 }
 
 

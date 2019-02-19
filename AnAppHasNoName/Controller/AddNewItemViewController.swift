@@ -47,13 +47,11 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
             
             if i == 1{
                 scrollViewLabel.text = "What do you wanna add?"
-                
                 let typesButtonTitles = ["Movie","TV Series","Book"]
                 var typesButtonTopAnchor: CGFloat = 30
                 var typesButtonTagIndex = 1
                 
                 for typesButtonTitle in typesButtonTitles {
-                    
                     let typesButton: UIButton = {
                         let button = UIButton()
                         button.backgroundColor = .white
@@ -77,6 +75,21 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
                 
             } else if i == 2 {
                 scrollViewLabel.text = "What's its neme?"
+                let itemNametextField: UITextField = {
+                    let textField = UITextField()
+                    textField.placeholder = "Type the name of it" //TODO: Replace the word 'it' with what the user choose
+                    textField.textAlignment = .center
+                    textField.tintColor = .white
+                    textField.textColor = .white
+                    textField.translatesAutoresizingMaskIntoConstraints = false
+                    return textField
+                }()
+                self.scrollView.addSubview(itemNametextField)
+                itemNametextField.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 30).isActive = true
+                itemNametextField.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
+                itemNametextField.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
+                itemNametextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                
             } else if i == 3 {
                 scrollViewLabel.text = "Upload a picture of it" //TODO: Replace the word 'it' with what the user choose
             } else if i == 4 {
