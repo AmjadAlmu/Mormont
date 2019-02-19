@@ -12,11 +12,11 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     lazy var menuBarItems: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = Config.MAIN_COLOR
-        cv.dataSource = self
-        cv.delegate = self
-        return cv
+        let menuBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        menuBarCollectionView.backgroundColor = Config.MAIN_COLOR
+        menuBarCollectionView.dataSource = self
+        menuBarCollectionView.delegate = self
+        return menuBarCollectionView
     }()
     
     let cellId = "menuBarItems"

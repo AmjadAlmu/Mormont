@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    var items = [Item]()
+    private var items = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         return mb
     }()
     
-    func setUpMenuBar() {
+    private func setUpMenuBar() {
         view.addSubview(menuBar)
         view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat("V:|[v0(50)]", views: menuBar)
