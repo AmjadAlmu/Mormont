@@ -8,12 +8,13 @@
 
 import UIKit
 
-class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
+class AddNewItemViewController: UIViewController {
     
     @IBOutlet weak var stepIndicatorView: StepIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var isScrollViewInitialized = false
+    private var selectedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 return label
             }()
+            
             self.scrollView.addSubview(scrollViewLabel)
             
             if i == 1{
@@ -77,13 +79,14 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
                 scrollViewLabel.text = "What's its neme?"
                 let itemNametextField: UITextField = {
                     let textField = UITextField()
-                    textField.placeholder = "Type the name of it" //TODO: Replace the word 'it' with what the user choose
+                    textField.placeholder = "Type it here" //TODO: Replace the word 'it' with what the user choose
                     textField.textAlignment = .center
                     textField.tintColor = .white
                     textField.textColor = .white
                     textField.translatesAutoresizingMaskIntoConstraints = false
                     return textField
-                }()
+                }() //TODO: Add underline to textfield
+                
                 self.scrollView.addSubview(itemNametextField)
                 itemNametextField.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 30).isActive = true
                 itemNametextField.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
@@ -92,6 +95,26 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
                 
             } else if i == 3 {
                 scrollViewLabel.text = "Upload a picture of it" //TODO: Replace the word 'it' with what the user choose
+                let selectPictureButton: UIButton = {
+                    let button = UIButton()
+                    button.backgroundColor = .clear
+                    button.setTitle("Select a picture", for: .normal)
+                    button.setTitleColor(.white, for: .normal)
+                    button.layer.borderWidth = 1
+                    button.layer.borderColor = UIColor.white.cgColor
+                    button.layer.cornerRadius = 15
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                    button.addTarget(self, action: #selector(selectItemPicture), for: .touchUpInside)
+                    return button
+                }()
+                
+                self.scrollView.addSubview(selectPictureButton)
+                selectPictureButton.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 40).isActive = true
+                selectPictureButton.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 80).isActive = true
+                selectPictureButton.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 160).isActive = true
+                selectPictureButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                
+                
             } else if i == 4 {
                 scrollViewLabel.text = "test from four"
             } else {
@@ -109,14 +132,33 @@ class AddNewItemViewController: UIViewController,UIScrollViewDelegate {
         print("Hi: \(sender.tag)")
     }
     
+    @objc func selectItemPicture() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
+    }
+    
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - UIScrollViewDelegate
+    
+}
+
+extension AddNewItemViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageIndex = scrollView.contentOffset.x / scrollView.frame.size.width
         stepIndicatorView.currentStep = Int(pageIndex)
     }
-    
+}
+
+
+extension AddNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            selectedImage = image
+        }
+        dismiss(animated: true, completion: nil)
+        
+    }
 }
