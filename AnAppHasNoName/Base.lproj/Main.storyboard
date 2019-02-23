@@ -45,7 +45,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="hxz-i6-Z77"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
@@ -65,7 +65,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="elO-jI-G3A"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
@@ -223,8 +223,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jrG-6v-S5g">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="0Do-V0-ocO">
+                        <barButtonItem key="leftBarButtonItem" title="Back" image="back" id="0Do-V0-ocO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="backButton:" destination="Trd-wt-MHf" id="RUh-hP-wn3"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="wcE-Bd-bC0">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -234,6 +237,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButtonOutlet" destination="0Do-V0-ocO" id="8M6-TC-6ec"/>
                         <outlet property="scrollView" destination="J1c-nc-fup" id="vgi-Pf-2EG"/>
                         <outlet property="stepIndicatorView" destination="COu-wY-HuM" id="N4k-Ov-b3x"/>
                     </connections>
@@ -344,7 +348,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="TRF-WO-1tl"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                             </textField>
@@ -364,7 +368,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="guB-6C-BMn"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                             </textField>
@@ -384,7 +388,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="szU-QI-Un6"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
@@ -513,6 +517,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="37.5" height="37.5"/>
         <image name="email" width="75" height="75"/>
         <image name="home" width="21" height="23"/>
         <image name="home_selected" width="21" height="23"/>
@@ -523,6 +528,6 @@
         <image name="profile_selected" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Le-Xp-C9e"/>
+        <segue reference="MhQ-C2-fc3"/>
     </inferredMetricsTieBreakers>
 </document>

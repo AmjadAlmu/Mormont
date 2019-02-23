@@ -12,6 +12,7 @@ class AddNewItemViewController: UIViewController {
     
     @IBOutlet weak var stepIndicatorView: StepIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var backButtonOutlet: UIBarButtonItem!
     
     private var isScrollViewInitialized = false
     private var selectedImage: UIImage?
@@ -19,7 +20,8 @@ class AddNewItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        self.backButtonOutlet.isEnabled = false
+        self.backButtonOutlet.tintColor = .clear
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +47,20 @@ class AddNewItemViewController: UIViewController {
                 return label
             }()
             
+            let scrollViewNextButton: UIButton = {
+                let button = UIButton()
+                button.backgroundColor = Config.MAIN_COLOR
+                button.setTitle("Next", for: .normal)
+                button.setTitleColor(.white, for: .normal)
+                button.layer.cornerRadius = 20
+                button.tag = 1
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.addTarget(self, action: #selector(goToNextPage), for: .touchUpInside)
+                return button
+            }()
+            
             self.scrollView.addSubview(scrollViewLabel)
+            self.scrollView.addSubview(scrollViewNextButton)
             
             if i == 1{
                 scrollViewLabel.text = "What do you wanna add?"
@@ -79,7 +94,7 @@ class AddNewItemViewController: UIViewController {
                 scrollViewLabel.text = "What's its neme?"
                 let itemNametextField: UITextField = {
                     let textField = UITextField()
-                    textField.placeholder = "Type it here" //TODO: Replace the word 'it' with what the user choose
+                    textField.placeholder = "Type it here"
                     textField.textAlignment = .center
                     textField.tintColor = .white
                     textField.textColor = .white
@@ -119,11 +134,18 @@ class AddNewItemViewController: UIViewController {
                 scrollViewLabel.text = "test from four"
             } else {
                 scrollViewLabel.text = "test from the last!"
+                scrollViewNextButton.tag = 2
+                scrollViewNextButton.setTitle("Submit", for: .normal)
             }
             
             
             scrollViewLabel.centerXAnchor.constraint(equalTo: self.scrollView.rightAnchor, constant: self.scrollView.frame.width / 2.0 * (CGFloat(i - 1) * 2.0 + 1.0)).isActive = true
             scrollViewLabel.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 5).isActive = true
+            
+            scrollViewNextButton.centerXAnchor.constraint(equalTo: self.scrollView.rightAnchor, constant: self.scrollView.frame.width / 2.0 * (CGFloat(i - 1) * 2.0 + 1.0)).isActive = true
+            scrollViewNextButton.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 160).isActive = true
+            scrollViewNextButton.bottomAnchor.constraint(equalTo: self.scrollView.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+            scrollViewNextButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
         
     }
@@ -138,27 +160,52 @@ class AddNewItemViewController: UIViewController {
         present(pickerController, animated: true, completion: nil)
     }
     
+    @objc func goToNextPage(sender:UIButton!) { //TODO: Merge Next and Back methods together
+        if sender.tag == 1 {
+            let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+            var frame: CGRect = self.scrollView.frame
+            frame.origin.x = frame.size.width * CGFloat(pageNumber + 1.0)
+            frame.origin.y = 0
+            self.scrollView.scrollRectToVisible(frame, animated: true)
+        } else {
+            //Case to send data to database
+            print("Hi: \(sender.tag)")
+        }
+        
+    }
+    
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+        var frame: CGRect = self.scrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(pageNumber - 1.0)
+        frame.origin.y = 0
+        self.scrollView.scrollRectToVisible(frame, animated: true)
+    }
     
 }
 
-extension AddNewItemViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = scrollView.contentOffset.x / scrollView.frame.size.width
         stepIndicatorView.currentStep = Int(pageIndex)
+        
+        if pageIndex != 0.0 {
+            self.backButtonOutlet.isEnabled = true
+            self.backButtonOutlet.tintColor = .white
+        } else {
+            self.backButtonOutlet.isEnabled = false
+            self.backButtonOutlet.tintColor = .clear
+        }
     }
-}
-
-
-extension AddNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }
