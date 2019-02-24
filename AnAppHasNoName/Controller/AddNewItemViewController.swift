@@ -123,6 +123,7 @@ class AddNewItemViewController: UIViewController {
                     return button
                 }()
                 
+                //TODO: Add UIImage contain image placeholder
                 self.scrollView.addSubview(selectPictureButton)
                 selectPictureButton.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 40).isActive = true
                 selectPictureButton.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 80).isActive = true
@@ -131,13 +132,30 @@ class AddNewItemViewController: UIViewController {
                 
                 
             } else if i == 4 {
-                scrollViewLabel.text = "test from four"
-            } else {
-                scrollViewLabel.text = "test from the last!"
+                scrollViewLabel.text = "What is it talking about?"
                 scrollViewNextButton.tag = 2
                 scrollViewNextButton.setTitle("Submit", for: .normal)
+                //TODO: scrollViewNextButton should have different style in this case
+                
+                //TODO: Add a placeholder to this textView
+                let itemCaptiontextView: UITextView = {
+                    let textView = UITextView()
+                    textView.textAlignment = .left
+                    textView.layer.cornerRadius = 10
+                    textView.backgroundColor = .white
+                    textView.font = UIFont.systemFont(ofSize: 20)
+                    textView.textColor = .lightGray
+                    textView.translatesAutoresizingMaskIntoConstraints = false
+                    return textView
+                }()
+                
+                self.scrollView.addSubview(itemCaptiontextView)
+                itemCaptiontextView.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 40).isActive = true
+                itemCaptiontextView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
+                itemCaptiontextView.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
+                itemCaptiontextView.heightAnchor.constraint(equalToConstant: self.scrollView.frame.height / 2).isActive = true
+                
             }
-            
             
             scrollViewLabel.centerXAnchor.constraint(equalTo: self.scrollView.rightAnchor, constant: self.scrollView.frame.width / 2.0 * (CGFloat(i - 1) * 2.0 + 1.0)).isActive = true
             scrollViewLabel.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 5).isActive = true

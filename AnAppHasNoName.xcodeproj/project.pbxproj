@@ -132,7 +132,6 @@
 				F14460392180082900EA6973 /* Model */,
 				F14460362180076F00EA6973 /* View */,
 				F1446037218007D500EA6973 /* Controller */,
-				954F35B622136F59003943CB /* StepIndicator */,
 				F14460442182DCBA00EA6973 /* Helpers */,
 				F1446029217FFF8500EA6973 /* Assets.xcassets */,
 				F144602B217FFF8500EA6973 /* LaunchScreen.storyboard */,
@@ -177,6 +176,7 @@
 		F14460442182DCBA00EA6973 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				954F35B622136F59003943CB /* StepIndicator */,
 				F14460452182DCDA00EA6973 /* Extension.swift */,
 			);
 			path = Helpers;
