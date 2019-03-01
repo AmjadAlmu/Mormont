@@ -15,6 +15,7 @@ class AddNewItemViewController: UIViewController {
     @IBOutlet weak var backButtonOutlet: UIBarButtonItem!
     
     private var isScrollViewInitialized = false
+    private var itemDataDic = [String: Any]()
     private var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -77,7 +78,7 @@ class AddNewItemViewController: UIViewController {
                         button.layer.cornerRadius = 15
                         button.tag = typesButtonTagIndex
                         button.translatesAutoresizingMaskIntoConstraints = false
-                        button.addTarget(self, action: #selector(specifyWhichButtonWasClicked), for: .touchUpInside)
+                        button.addTarget(self, action: #selector(selectItemType), for: .touchUpInside)
                         return button
                     }()
                     
@@ -108,6 +109,8 @@ class AddNewItemViewController: UIViewController {
                 itemNametextField.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
                 itemNametextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
                 
+                self.itemDataDic["name"] = itemNametextField.text!
+                
             } else if i == 3 {
                 scrollViewLabel.text = "Upload a picture of it" //TODO: Replace the word 'it' with what the user choose
                 let selectPictureButton: UIButton = {
@@ -135,7 +138,7 @@ class AddNewItemViewController: UIViewController {
                 scrollViewLabel.text = "What is it talking about?"
                 scrollViewNextButton.tag = 2
                 scrollViewNextButton.setTitle("Submit", for: .normal)
-                //TODO: scrollViewNextButton should have different style in this case
+                //TODO: scrollViewNextButton may have different style in this case
                 
                 //TODO: Add a placeholder to this textView
                 let itemCaptiontextView: UITextView = {
@@ -147,13 +150,15 @@ class AddNewItemViewController: UIViewController {
                     textView.textColor = .lightGray
                     textView.translatesAutoresizingMaskIntoConstraints = false
                     return textView
-                }()
+                }()//TODO: Prevent too long text
                 
                 self.scrollView.addSubview(itemCaptiontextView)
                 itemCaptiontextView.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 40).isActive = true
                 itemCaptiontextView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
                 itemCaptiontextView.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
                 itemCaptiontextView.heightAnchor.constraint(equalToConstant: self.scrollView.frame.height / 2).isActive = true
+                
+                self.itemDataDic["caption"] = itemCaptiontextView.text!
                 
             }
             
@@ -168,14 +173,24 @@ class AddNewItemViewController: UIViewController {
         
     }
     
-    @objc func specifyWhichButtonWasClicked(sender:UIButton!) {
-        print("Hi: \(sender.tag)")
+    @objc func selectItemType(sender:UIButton!) {
+        switch sender.tag {
+        case 1:
+            self.itemDataDic["type"] = Config.MOVIES_ENDPOINT
+        case 2:
+            self.itemDataDic["type"] = Config.TV_SERIESES_ENDPOINT
+        case 3:
+            self.itemDataDic["type"] = Config.BOOKS_ENDPOINT
+        default:
+            print("Unknown type")
+        }
     }
     
     @objc func selectItemPicture() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
+        
     }
     
     @objc func goToNextPage(sender:UIButton!) { //TODO: Merge Next and Back methods together
@@ -187,7 +202,14 @@ class AddNewItemViewController: UIViewController {
             self.scrollView.scrollRectToVisible(frame, animated: true)
         } else {
             //Case to send data to database
-            print("Hi: \(sender.tag)")
+            self.itemDataDic["date"] = "00-00-0000" //TODO: Calculate the date
+            ServerManger.sendDataToDatabase(type: self.itemDataDic["type"] as! String, name: self.itemDataDic["name"] as! String, imageData: self.itemDataDic["imageData"] as! Data, caption: self.itemDataDic["caption"] as! String, date: self.itemDataDic["date"] as! String, onSuccess: {
+                //TODO: Refactoring
+                print("New item added 😃")
+            }) { (error) in
+                //TODO: Refactoring
+                print("The ERROR \(error)!!!!!!!!!!")
+            }
         }
         
     }

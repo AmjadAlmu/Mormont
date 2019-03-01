@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class ServerManger {
     
@@ -17,7 +18,9 @@ class ServerManger {
         return instance
     }()
     
-    //MARK: - User Settings API
+    private static let ref  = Database.database().reference()
+    
+    //MARK: - Authentication API
     var CURRENT_USER: FirebaseAuth.User? {
         if let currentUser = Auth.auth().currentUser {
             return currentUser
@@ -57,9 +60,55 @@ class ServerManger {
     }
     
     static func setUserInfomation(username: String, email: String, uid: String, onSuccess: @escaping () -> Void){
-        let ref  = Database.database().reference()
         ref.child(Config.MANAGE_USERS_ENDPOINT).child(uid).setValue(["username": username , "email": email])
         onSuccess()
     }
+    
+    //MARK: - Item API
+    static func sendDataToDatabase(type: String, name: String, imageData: Data, caption: String, date: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
+        guard let currentUser = sharedInstance.CURRENT_USER else {
+            return
+        }
+        
+        var imageUrl = String()
+        
+        //TODO: Create a separate method for uploading image
+        let imageId = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child(Config.ITEM_IMAGES_ENDPOINT).child(imageId)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+            guard metadata != nil else {
+                return
+            }
+            
+            storageRef.downloadURL(completion: { (url, error) in
+                guard let downloadURL = url else {
+                    return
+                }
+                imageUrl = downloadURL.absoluteString
+            })
+        }
+        
+        let currentUserId = currentUser.uid
+        let dict = ["uid": currentUserId, "name": name, "imageUrl": imageUrl, "caption": caption, "seasonsCount": 0, "date": date] as [String : Any]
+
+        
+        if let newItemId = ref.child(type).childByAutoId() .key {
+            let newItemReference = ref.child(type).child(newItemId)
+            newItemReference.setValue(dict) { (error, ref) in
+                if error != nil {
+                    onError(error?.localizedDescription)
+                }
+                //TODO: Perform success closure
+                onSuccess()
+                print("Haay!!!")
+
+            }
+        }
+        
+    }
+    
+    //MARK: - Common API
     
 }

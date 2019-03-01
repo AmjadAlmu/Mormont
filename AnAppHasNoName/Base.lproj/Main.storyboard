@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="VLa-6B-gnB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="VLa-6B-gnB">
                                 <rect key="frame" x="67.5" y="63" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="IAy-P1-DAH"/>
@@ -324,7 +324,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="w9o-r9-NHa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="w9o-r9-NHa">
                                 <rect key="frame" x="67.5" y="66" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="LlK-7x-1CA"/>
@@ -449,7 +449,7 @@
                         <outlet property="emailTextField" destination="aD2-eC-Un0" id="BcK-Ab-MzG"/>
                         <outlet property="passwordTextField" destination="jZF-mD-7DP" id="q11-NM-1mY"/>
                         <outlet property="signupButtonOutlet" destination="kix-Wf-eoh" id="cmV-4S-43K"/>
-                        <outlet property="usernameTextField" destination="aD2-eC-Un0" id="KPo-ya-UBQ"/>
+                        <outlet property="usernameTextField" destination="kW7-9A-R3K" id="JGS-TV-3h7"/>
                         <segue destination="BE8-sb-WuB" kind="presentation" identifier="signUpToTabbarVC" id="MhQ-C2-fc3"/>
                     </connections>
                 </viewController>
@@ -521,7 +521,7 @@
         <image name="email" width="75" height="75"/>
         <image name="home" width="21" height="23"/>
         <image name="home_selected" width="21" height="23"/>
-        <image name="logoplaceholder" width="225" height="180"/>
+        <image name="logo_placeholder" width="225" height="180"/>
         <image name="name" width="75" height="75"/>
         <image name="password" width="75" height="75"/>
         <image name="profile" width="33" height="33"/>
