@@ -174,7 +174,7 @@ class AddNewItemViewController: UIViewController {
     }
     
     @objc func selectItemType(sender:UIButton!) {
-        switch sender.tag {
+        switch sender.tag { //TODO: Change buttons tags to text via enum
         case 1:
             self.itemDataDic["type"] = Config.MOVIES_ENDPOINT
         case 2:
@@ -202,14 +202,20 @@ class AddNewItemViewController: UIViewController {
             self.scrollView.scrollRectToVisible(frame, animated: true)
         } else {
             //Case to send data to database
-            self.itemDataDic["date"] = "00-00-0000" //TODO: Calculate the date
-            ServerManger.sendDataToDatabase(type: self.itemDataDic["type"] as! String, name: self.itemDataDic["name"] as! String, imageData: self.itemDataDic["imageData"] as! Data, caption: self.itemDataDic["caption"] as! String, date: self.itemDataDic["date"] as! String, onSuccess: {
+            if let itemleImg =  self.selectedImage, let imageData = itemleImg.jpegData(compressionQuality: 0.1){
+                self.itemDataDic["date"] = "00-00-0000" //TODO: Calculate the date
+                ServerManger.sendDataToDatabase(type: self.itemDataDic["type"] as! String, name: self.itemDataDic["name"] as! String, imageData: imageData, caption: self.itemDataDic["caption"] as! String, date: self.itemDataDic["date"] as! String, onSuccess: {
+                    //TODO: Refactoring
+                    print("New item added 😃")
+                }) { (error) in
+                    //TODO: Refactoring
+                    print("The ERROR \(error)!!!!!!!!!!")
+                }
+            } else {
                 //TODO: Refactoring
-                print("New item added 😃")
-            }) { (error) in
-                //TODO: Refactoring
-                print("The ERROR \(error)!!!!!!!!!!")
+                print("item image can't be empty!!")
             }
+            
         }
         
     }

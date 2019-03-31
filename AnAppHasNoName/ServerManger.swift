@@ -70,7 +70,7 @@ class ServerManger {
             return
         }
         
-        var imageUrl = String()
+        var dict = [String: Any]()
         
         //TODO: Create a separate method for uploading image
         let imageId = NSUUID().uuidString
@@ -86,25 +86,22 @@ class ServerManger {
                 guard let downloadURL = url else {
                     return
                 }
-                imageUrl = downloadURL.absoluteString
-            })
-        }
-        
-        let currentUserId = currentUser.uid
-        let dict = ["uid": currentUserId, "name": name, "imageUrl": imageUrl, "caption": caption, "seasonsCount": 0, "date": date] as [String : Any]
-
-        
-        if let newItemId = ref.child(type).childByAutoId() .key {
-            let newItemReference = ref.child(type).child(newItemId)
-            newItemReference.setValue(dict) { (error, ref) in
-                if error != nil {
-                    onError(error?.localizedDescription)
+                let imageUrl = downloadURL.absoluteString
+                let currentUserId = currentUser.uid
+                dict = ["uid": currentUserId, "name": name, "imageUrl": imageUrl, "caption": caption, "seasonsCount": 0, "date": date] as [String : Any]
+                
+                if let newItemId = ref.child(type).childByAutoId() .key {
+                    let newItemReference = ref.child(type).child(newItemId)
+                    newItemReference.setValue(dict) { (error, ref) in
+                        if error != nil {
+                            onError(error?.localizedDescription)
+                        }
+                        onSuccess()
+                        
+                    }
                 }
-                //TODO: Perform success closure
-                onSuccess()
-                print("Haay!!!")
-
-            }
+                
+            })
         }
         
     }
