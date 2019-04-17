@@ -17,6 +17,7 @@ class AddNewItemViewController: UIViewController {
     private var isScrollViewInitialized = false
     private var itemDataDic = [String: Any]()
     private var selectedImage: UIImage?
+    private var typsButtonsArray = [UIButton]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,7 @@ class AddNewItemViewController: UIViewController {
                         return button
                     }()
                     
+                    self.typsButtonsArray.append(typesButton)
                     self.scrollView.addSubview(typesButton)
                     typesButton.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: typesButtonTopAnchor).isActive = true
                     typesButton.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 45).isActive = true
@@ -100,6 +102,7 @@ class AddNewItemViewController: UIViewController {
                     textField.tintColor = .white
                     textField.textColor = .white
                     textField.translatesAutoresizingMaskIntoConstraints = false
+                    textField.addTarget(self, action: #selector(textFieldTyping), for: .editingChanged)
                     return textField
                 }() //TODO: Add underline to textfield
                 
@@ -108,8 +111,6 @@ class AddNewItemViewController: UIViewController {
                 itemNametextField.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
                 itemNametextField.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
                 itemNametextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-                
-                self.itemDataDic["name"] = itemNametextField.text!
                 
             } else if i == 3 {
                 scrollViewLabel.text = "Upload a picture of it" //TODO: Replace the word 'it' with what the user choose
@@ -148,6 +149,7 @@ class AddNewItemViewController: UIViewController {
                     textView.backgroundColor = .white
                     textView.font = UIFont.systemFont(ofSize: 20)
                     textView.textColor = .lightGray
+                    textView.delegate = self
                     textView.translatesAutoresizingMaskIntoConstraints = false
                     return textView
                 }()//TODO: Prevent too long text
@@ -157,8 +159,6 @@ class AddNewItemViewController: UIViewController {
                 itemCaptiontextView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
                 itemCaptiontextView.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
                 itemCaptiontextView.heightAnchor.constraint(equalToConstant: self.scrollView.frame.height / 2).isActive = true
-                
-                self.itemDataDic["caption"] = itemCaptiontextView.text!
                 
             }
             
@@ -183,6 +183,16 @@ class AddNewItemViewController: UIViewController {
             self.itemDataDic["type"] = Config.BOOKS_ENDPOINT
         default:
             print("Unknown type")
+        }
+        
+        for button in self.typsButtonsArray {
+            if button.tag == sender.tag {
+                sender.backgroundColor = Config.MAIN_COLOR
+                sender.setTitleColor(.white, for: .normal)
+            } else {
+                button.backgroundColor = .white
+                button.setTitleColor(Config.MAIN_COLOR, for: .normal)
+            }
         }
     }
     
@@ -215,9 +225,13 @@ class AddNewItemViewController: UIViewController {
                 //TODO: Refactoring
                 print("item image can't be empty!!")
             }
-            
         }
-        
+    }
+    
+    @objc func textFieldTyping(textField:UITextField) {
+        if let typedText = textField.text {
+            self.itemDataDic["name"] = typedText
+        }
     }
     
     @IBAction func cancelButton(_ sender: Any) {
@@ -234,7 +248,7 @@ class AddNewItemViewController: UIViewController {
     
 }
 
-extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = scrollView.contentOffset.x / scrollView.frame.size.width
         stepIndicatorView.currentStep = Int(pageIndex)
@@ -253,5 +267,9 @@ extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControlle
             selectedImage = image
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.itemDataDic["caption"] = textView.text
     }
 }
