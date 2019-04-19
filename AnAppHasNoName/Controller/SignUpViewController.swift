@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SignUpViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
@@ -33,11 +34,17 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signupButton(_ sender: Any) {
+        let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+        progressHUD.label.text = "Please wait"
         ServerManger.signUp(username: usernameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, onSuccess: {
+            progressHUD.hide(animated: true)
             self.performSegue(withIdentifier: "signUpToTabbarVC", sender: self)
         }) { (error) in
-            //TODO: Refactoring
-            print("The ERROR \(error)!!!!!!!!!!")
+            progressHUD.hide(animated: true)
+            Config.displayAlertWithHandler(self, title: "Error", message: error!, handler: { (action) in
+                self.emailTextField.text = ""
+                self.passwordTextField.text = ""
+            })
         }
     }
     

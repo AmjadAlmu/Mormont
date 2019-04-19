@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class LogInViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
@@ -15,7 +16,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -26,11 +27,16 @@ class LogInViewController: UIViewController {
     }
     
     @IBAction func signInButton(_ sender: Any) {
+        let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+        progressHUD.label.text = "Please wait"
         ServerManger.signIn(email: emailTextField.text!, password: passwordTextField.text!, onSuccess: {
+            progressHUD.hide(animated: true)
             self.performSegue(withIdentifier: "logInToTabbarVC", sender: self)
         }) { (error) in
-            //TODO: Refactoring
-            print("The ERROR \(error)!!!!!!!!!!")
+            progressHUD.hide(animated: true)
+            Config.displayAlertWithHandler(self, title: "Error", message: error!, handler: { (action) in
+                self.passwordTextField.text = ""
+            })
         }
     }
     @IBAction func forgotPasswordButton(_ sender: Any) {

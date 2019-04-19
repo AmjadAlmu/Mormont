@@ -8,6 +8,7 @@ target 'AnAppHasNoName' do
  pod 'Firebase/Auth'
  pod 'Firebase/Database'
  pod 'Firebase/Storage'
+ pod 'MBProgressHUD', '~> 1.1.0'
 
   # Pods for AnAppHasNoName
 

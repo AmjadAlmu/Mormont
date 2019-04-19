@@ -96,8 +96,7 @@ class ServerManger {
                         if error != nil {
                             onError(error?.localizedDescription)
                         }
-                        onSuccess()
-                        
+                        onSuccess() 
                     }
                 }
                 

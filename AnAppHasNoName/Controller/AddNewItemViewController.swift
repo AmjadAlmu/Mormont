@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class AddNewItemViewController: UIViewController {
     
@@ -18,6 +19,7 @@ class AddNewItemViewController: UIViewController {
     private var itemDataDic = [String: Any]()
     private var selectedImage: UIImage?
     private var typsButtonsArray = [UIButton]()
+    private var selectedImagePlaceholder = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,12 +129,25 @@ class AddNewItemViewController: UIViewController {
                     return button
                 }()
                 
-                //TODO: Add UIImage contain image placeholder
+                self.selectedImagePlaceholder = {
+                    let imageView = UIImageView()
+//                    imageView.image = UIImage(named: "image_placeholder")
+                    imageView.contentMode = .scaleAspectFit
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    return imageView
+                }()
+                
                 self.scrollView.addSubview(selectPictureButton)
+                self.scrollView.addSubview(selectedImagePlaceholder)
                 selectPictureButton.topAnchor.constraint(equalTo: scrollViewLabel.bottomAnchor, constant: 40).isActive = true
                 selectPictureButton.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 80).isActive = true
                 selectPictureButton.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 160).isActive = true
                 selectPictureButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                
+                selectedImagePlaceholder.topAnchor.constraint(equalTo: selectPictureButton.bottomAnchor, constant: 20).isActive = true
+                selectedImagePlaceholder.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: self.scrollView.frame.width * CGFloat(i - 1) + 45).isActive = true
+                selectedImagePlaceholder.widthAnchor.constraint(equalToConstant: self.scrollView.frame.width - 90).isActive = true
+                selectedImagePlaceholder.heightAnchor.constraint(equalToConstant: self.scrollView.frame.height / 2).isActive = true
                 
                 
             } else if i == 4 {
@@ -212,18 +227,20 @@ class AddNewItemViewController: UIViewController {
             self.scrollView.scrollRectToVisible(frame, animated: true)
         } else {
             //Case to send data to database
+            let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+            progressHUD.label.text = "Please wait"
             if let itemleImg =  self.selectedImage, let imageData = itemleImg.jpegData(compressionQuality: 0.1){
                 self.itemDataDic["date"] = "00-00-0000" //TODO: Calculate the date
                 ServerManger.sendDataToDatabase(type: self.itemDataDic["type"] as! String, name: self.itemDataDic["name"] as! String, imageData: imageData, caption: self.itemDataDic["caption"] as! String, date: self.itemDataDic["date"] as! String, onSuccess: {
-                    //TODO: Refactoring
-                    print("New item added 😃")
+                    progressHUD.hide(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }) { (error) in
-                    //TODO: Refactoring
-                    print("The ERROR \(error)!!!!!!!!!!")
+                    progressHUD.hide(animated: true)
+                    Config.displayAlert(self, title: "Error", message: error!)
                 }
             } else {
-                //TODO: Refactoring
-                print("item image can't be empty!!")
+                progressHUD.hide(animated: true)
+                Config.displayAlert(self, title: "Error", message: "item image can't be empty")
             }
         }
     }
@@ -265,6 +282,8 @@ extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
+            selectedImagePlaceholder.image = selectedImage
+            //TODO: It may need an indicator while image uploading
         }
         dismiss(animated: true, completion: nil)
     }

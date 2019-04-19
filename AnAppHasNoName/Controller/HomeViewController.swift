@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class HomeViewController: UIViewController {
     
@@ -34,11 +35,15 @@ class HomeViewController: UIViewController {
     
     @IBAction func logOutButton(_ sender: Any) {
         //TODO: Move this button to user's profile
+        let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+        progressHUD.label.text = "Please wait"
+        //TODO: Asking user if he is sure about logging out by alert
         ServerManger.logOut(onSuccess: {
+            progressHUD.hide(animated: true)
             self.performSegue(withIdentifier: "SignInViewController", sender: nil)
         }) { (error) in
-            //TODO: Refactoring
-            print("The ERROR \(error)!!!!!!!!!!")
+            progressHUD.hide(animated: true)
+            Config.displayAlert(self, title: "Error", message: error!)
         }
     }
     
