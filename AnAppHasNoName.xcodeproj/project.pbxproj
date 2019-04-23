@@ -13,6 +13,7 @@
 		954F35B122136EED003943CB /* AnnularLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F35B022136EED003943CB /* AnnularLayer.swift */; };
 		954F35B322136EF6003943CB /* LineLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F35B222136EF6003943CB /* LineLayer.swift */; };
 		954F35B522136EFE003943CB /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 954F35B422136EFE003943CB /* Media.xcassets */; };
+		95A14DC4226CB3B8005423B8 /* itemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A14DC3226CB3B8005423B8 /* itemCollectionViewCell.swift */; };
 		F1399D022184651400536ECE /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D012184651400536ECE /* MenuBarCollectionViewCell.swift */; };
 		F1399D042185489800536ECE /* TabBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D032185489800536ECE /* TabBarSettings.swift */; };
 		F1399D242185609C00536ECE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1399D232185609C00536ECE /* ProfileViewController.swift */; };
@@ -28,7 +29,6 @@
 		F144603D21800A4600EA6973 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F144603C21800A4600EA6973 /* SignUpViewController.swift */; };
 		F14460412181CCAC00EA6973 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14460402181CCAC00EA6973 /* Config.swift */; };
 		F14460432182D4B700EA6973 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14460422182D4B700EA6973 /* HomeViewController.swift */; };
-		F14460462182DCDA00EA6973 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14460452182DCDA00EA6973 /* Extension.swift */; };
 		F14460482182E01F00EA6973 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14460472182E01F00EA6973 /* MenuBar.swift */; };
 		F1B0557F21E30D1D000C50A5 /* ServerManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B0557E21E30D1D000C50A5 /* ServerManger.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +41,7 @@
 		954F35B022136EED003943CB /* AnnularLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnularLayer.swift; sourceTree = "<group>"; };
 		954F35B222136EF6003943CB /* LineLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineLayer.swift; sourceTree = "<group>"; };
 		954F35B422136EFE003943CB /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		95A14DC3226CB3B8005423B8 /* itemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemCollectionViewCell.swift; sourceTree = "<group>"; };
 		A05DD11AC4E5154E09203885 /* Pods-AnAppHasNoName.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnAppHasNoName.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnAppHasNoName/Pods-AnAppHasNoName.release.xcconfig"; sourceTree = "<group>"; };
 		F1399D012184651400536ECE /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1399D032185489800536ECE /* TabBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSettings.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		F144603C21800A4600EA6973 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		F14460402181CCAC00EA6973 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F14460422182D4B700EA6973 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		F14460452182DCDA00EA6973 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F14460472182E01F00EA6973 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		F1B0557E21E30D1D000C50A5 /* ServerManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +147,7 @@
 				F1399D032185489800536ECE /* TabBarSettings.swift */,
 				F14460472182E01F00EA6973 /* MenuBar.swift */,
 				F1399D012184651400536ECE /* MenuBarCollectionViewCell.swift */,
+				95A14DC3226CB3B8005423B8 /* itemCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				954F35B622136F59003943CB /* StepIndicator */,
-				F14460452182DCDA00EA6973 /* Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -313,11 +313,11 @@
 				F1399D022184651400536ECE /* MenuBarCollectionViewCell.swift in Sources */,
 				954F35B322136EF6003943CB /* LineLayer.swift in Sources */,
 				954F35AF22136EDA003943CB /* StepIndicatorView.swift in Sources */,
-				F14460462182DCDA00EA6973 /* Extension.swift in Sources */,
 				F1399D042185489800536ECE /* TabBarSettings.swift in Sources */,
 				954F3598220F5B42003943CB /* AddNewItemViewController.swift in Sources */,
 				F1399D2C2185954400536ECE /* Item.swift in Sources */,
 				F1399D2A2185951600536ECE /* Comment.swift in Sources */,
+				95A14DC4226CB3B8005423B8 /* itemCollectionViewCell.swift in Sources */,
 				F144603D21800A4600EA6973 /* SignUpViewController.swift in Sources */,
 				F14460482182E01F00EA6973 /* MenuBar.swift in Sources */,
 				F144603B21800A1500EA6973 /* LogInViewController.swift in Sources */,

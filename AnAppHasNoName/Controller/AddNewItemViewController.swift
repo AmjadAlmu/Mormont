@@ -131,8 +131,8 @@ class AddNewItemViewController: UIViewController {
                 
                 self.selectedImagePlaceholder = {
                     let imageView = UIImageView()
-//                    imageView.image = UIImage(named: "image_placeholder")
-                    imageView.contentMode = .scaleAspectFit
+                    imageView.contentMode = .scaleAspectFill
+                    imageView.clipsToBounds = true
                     imageView.translatesAutoresizingMaskIntoConstraints = false
                     return imageView
                 }()
@@ -214,6 +214,7 @@ class AddNewItemViewController: UIViewController {
     @objc func selectItemPicture() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        pickerController.allowsEditing = true
         present(pickerController, animated: true, completion: nil)
         
     }
@@ -230,7 +231,7 @@ class AddNewItemViewController: UIViewController {
             let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
             progressHUD.label.text = "Please wait"
             if let itemleImg =  self.selectedImage, let imageData = itemleImg.jpegData(compressionQuality: 0.1){
-                self.itemDataDic["date"] = "00-00-0000" //TODO: Calculate the date
+                self.itemDataDic["date"] = Date().description
                 ServerManger.sendDataToDatabase(type: self.itemDataDic["type"] as! String, name: self.itemDataDic["name"] as! String, imageData: imageData, caption: self.itemDataDic["caption"] as! String, date: self.itemDataDic["date"] as! String, onSuccess: {
                     progressHUD.hide(animated: true)
                     self.dismiss(animated: true, completion: nil)

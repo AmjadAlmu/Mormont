@@ -21,6 +21,7 @@ struct Config {
     //MARK: - Application Colors
     static let MAIN_COLOR = UIColor(red:0.63, green:0.62, blue:0.93, alpha:1.0)
     static let SECONDARY_COLOR = UIColor(red:0.78, green:0.79, blue:0.97, alpha:1.0)
+    static let ITEM_COLLECTION_VIEW_CELL_COLOR = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
     
     //MARK: - Static Functions
     static func displayAlert(_ viewController: UIViewController, title: String, message: String) {

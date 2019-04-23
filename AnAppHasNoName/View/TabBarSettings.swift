@@ -13,12 +13,12 @@ class TabBarSettings: UITabBar {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.tintColor = Config.MAIN_COLOR
+        tintColor = Config.MAIN_COLOR
         setupAddNewItemButton()
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if self.isHidden {
+        if isHidden {
             return super.hitTest(point, with: event)
         }
         
@@ -43,8 +43,7 @@ class TabBarSettings: UITabBar {
     }
     
     @objc func openAddNewItemViewController() {
-        //                print("Test")
-        if let delegate = self.delegate as? UITabBarController {
+        if let delegate = delegate as? UITabBarController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let addNewItemVC = storyboard.instantiateViewController(withIdentifier: "AddNewItemViewControllerNav")
             delegate.present(addNewItemVC, animated: true, completion: nil)

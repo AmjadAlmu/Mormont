@@ -10,26 +10,28 @@ import UIKit
 
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    private let cellId = "menuBarItems"
+    private let menuBarItemsLabels = ["Movies","TV Serieses","Books"]
+    
     lazy var menuBarItems: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let menuBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        menuBarCollectionView.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         menuBarCollectionView.backgroundColor = Config.MAIN_COLOR
         menuBarCollectionView.dataSource = self
         menuBarCollectionView.delegate = self
+        menuBarCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return menuBarCollectionView
     }()
-    
-    let cellId = "menuBarItems"
-    let menuBarItemsLabels = ["Movies","TV Serieses","Books"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        menuBarItems.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        
         addSubview(menuBarItems)
-        addConstraintsWithFormat("H:|[v0]|", views: menuBarItems)
-        addConstraintsWithFormat("V:|[v0]|", views: menuBarItems)
+        menuBarItems.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        menuBarItems.leadingAnchor.constraint(equalTo: leadingAnchor).isActive =  true
+        menuBarItems.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        menuBarItems.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         
         //Making the middle cell selected
         let selectedCell = IndexPath(item: 1, section: 0)

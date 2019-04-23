@@ -19,3 +19,18 @@ class Item: NSObject {
     var type: String?
     
 }
+
+extension Item {
+    static func transformItem(dict: [String: Any], key: String) -> Item {
+        let item = Item()
+        item.id = key
+        item.name = dict["name"] as? String
+        item.caption =  dict["caption"] as? String
+        item.imageUrl = dict["imageUrl"] as? String
+        item.seasonsCount = dict["seasonsCount"] as? Int
+        item.uid = dict["uid"] as? String
+        item.date = dict["date"] as? String
+//        item.type = dict["type"] as? String
+        return item
+    }
+}

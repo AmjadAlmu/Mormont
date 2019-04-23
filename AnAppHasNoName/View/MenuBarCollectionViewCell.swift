@@ -39,8 +39,8 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     func setUpCell() {
         addSubview(itemLabel)
         itemLabel.widthAnchor.constraint(equalToConstant:  150).isActive = true
-        itemLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        itemLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        itemLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        itemLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
