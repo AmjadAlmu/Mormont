@@ -62,7 +62,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         itemsCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor, constant: 0).isActive = true
         itemsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive =  true
         itemsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        itemsCollectionView.heightAnchor.constraint(equalToConstant: view.bounds.height).isActive = true
+        itemsCollectionView.heightAnchor.constraint(equalToConstant: view.bounds.height - ((tabBarController?.tabBar.frame.size.height)! * 2)).isActive = true //TODO: Add footer or whatever to fix it
     }
     
     private func loadItemsToCollectionView() {
@@ -85,6 +85,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! itemCollectionViewCell
         cell.backgroundColor = Config.ITEM_COLLECTION_VIEW_CELL_COLOR
+        let item = items[indexPath.row]
+        cell.item = item
         return cell
     }
     

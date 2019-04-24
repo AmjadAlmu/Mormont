@@ -44,7 +44,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = menuBarItems.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuBarCollectionViewCell
-        cell.itemLabel.text = menuBarItemsLabels[indexPath.item]
+        cell.itemType.text = menuBarItemsLabels[indexPath.item]
         
         return cell
     }

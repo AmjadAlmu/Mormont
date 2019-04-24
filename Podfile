@@ -9,6 +9,7 @@ target 'AnAppHasNoName' do
  pod 'Firebase/Database'
  pod 'Firebase/Storage'
  pod 'MBProgressHUD', '~> 1.1.0'
+ pod 'Kingfisher', '~> 5.0'
 
   # Pods for AnAppHasNoName
 

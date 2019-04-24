@@ -10,7 +10,7 @@ import UIKit
 
 class MenuBarCollectionViewCell: UICollectionViewCell {
     
-    let itemLabel: UILabel = {
+    let itemType: UILabel = {
        let label = UILabel()
         label.textColor = Config.SECONDARY_COLOR
         label.textAlignment = .center
@@ -20,13 +20,13 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     
     override var isHighlighted: Bool {
         didSet {
-            itemLabel.textColor = isHighlighted ? .white : Config.SECONDARY_COLOR
+            itemType.textColor = isHighlighted ? .white : Config.SECONDARY_COLOR
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            itemLabel.textColor = isSelected ? .white : Config.SECONDARY_COLOR
+            itemType.textColor = isSelected ? .white : Config.SECONDARY_COLOR
         }
     }
     
@@ -37,10 +37,10 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpCell() {
-        addSubview(itemLabel)
-        itemLabel.widthAnchor.constraint(equalToConstant:  150).isActive = true
-        itemLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        itemLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        addSubview(itemType)
+        itemType.widthAnchor.constraint(equalToConstant:  150).isActive = true
+        itemType.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        itemType.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
