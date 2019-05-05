@@ -36,6 +36,8 @@ class itemCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpCell() {
+        self.backgroundColor = Config.ITEM_COLLECTION_VIEW_CELL_COLOR
+        
         addSubview(itemImageView)
         itemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         itemImageView.widthAnchor.constraint(equalTo: widthAnchor, constant: -30).isActive = true

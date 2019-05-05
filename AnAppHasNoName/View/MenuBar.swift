@@ -13,6 +13,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     private let cellId = "menuBarItems"
     private let menuBarItemsLabels = ["Movies","TV Serieses","Books"]
     
+    var homeViewController: HomeViewController?
+    
     lazy var menuBarItems: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let menuBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -47,6 +49,16 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         cell.itemType.text = menuBarItemsLabels[indexPath.item]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            homeViewController?.selectedTypeCell(selectedType: Config.MOVIES_ENDPOINT)
+        } else if indexPath.row == 1 {
+            homeViewController?.selectedTypeCell(selectedType: Config.TV_SERIESES_ENDPOINT)
+        } else {
+            homeViewController?.selectedTypeCell(selectedType: Config.BOOKS_ENDPOINT)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

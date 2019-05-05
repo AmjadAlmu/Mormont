@@ -1,5 +1,5 @@
 //
-//  AddNewItemViewController.swift
+//  AddItemController.swift
 //  AnAppHasNoName
 //
 //  Created by Amjad Almuwallad on 09/02/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class AddNewItemViewController: UIViewController {
+class AddItemController: UIViewController {
     
     @IBOutlet weak var stepIndicatorView: StepIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -61,7 +61,7 @@ class AddNewItemViewController: UIViewController {
                 button.translatesAutoresizingMaskIntoConstraints = false
                 button.addTarget(self, action: #selector(goToNextPage), for: .touchUpInside)
                 return button
-            }()
+            }() //TODO: Disable next button if data not completed
             
             self.scrollView.addSubview(scrollViewLabel)
             self.scrollView.addSubview(scrollViewNextButton)
@@ -266,7 +266,7 @@ class AddNewItemViewController: UIViewController {
     
 }
 
-extension AddNewItemViewController: UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+extension AddItemController: UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = scrollView.contentOffset.x / scrollView.frame.size.width
         stepIndicatorView.currentStep = Int(pageIndex)

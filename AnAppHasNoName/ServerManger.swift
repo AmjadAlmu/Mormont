@@ -103,8 +103,8 @@ class ServerManger {
         }
     }
     
-    static func loadItemsDataFromDatabase(completion: @escaping (Item) -> Void) {
-        Database.database().reference().child(Config.MOVIES_ENDPOINT).observe(.childAdded) { (snapshot) in
+    static func loadItemsDataFromDatabase(selectedType: String, completion: @escaping (Item) -> Void) {
+        Database.database().reference().child(selectedType).observe(.childAdded) { (snapshot) in
             if let dict = snapshot.value as? [String: Any] {
                 let item = Item.transformItem(dict: dict, key: snapshot.key)
                 completion(item)

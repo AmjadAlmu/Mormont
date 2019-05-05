@@ -12,10 +12,11 @@ import MBProgressHUD
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     private var items = [Item]()
-    private let cellId = "itemcollectionViewCell"
+    private let reuseIdentifier = "itemcollectionViewCell"
     
-    private let menuBar: MenuBar = {
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeViewController = self
         mb.translatesAutoresizingMaskIntoConstraints = false
         return mb
     }()
@@ -24,18 +25,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "Home"
-        
-        setUpMenuBar()
-        setUpItemsCollectionView()
-//        loadItemsToCollectionView()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadItemsToCollectionView()
+        setUpMenuBar()
+        setUpItemsCollectionView()
+        loadItemsToCollectionView(selectedType: Config.TV_SERIESES_ENDPOINT)
     }
     
     private func setUpMenuBar() {
@@ -50,7 +48,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         itemsCollectionView = {
             let layout = UICollectionViewFlowLayout()
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.register(itemCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+            collectionView.register(itemCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
             collectionView.delegate = self
             collectionView.dataSource = self
             collectionView.backgroundColor = .white
@@ -65,12 +63,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         itemsCollectionView.heightAnchor.constraint(equalToConstant: view.bounds.height - ((tabBarController?.tabBar.frame.size.height)! * 2)).isActive = true //TODO: Add footer or whatever to fix it
     }
     
-    private func loadItemsToCollectionView() {
+    private func loadItemsToCollectionView(selectedType: String) {
         let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
         progressHUD.label.text = "Loading"
         items.removeAll()
         itemsCollectionView.reloadData()
-        ServerManger.loadItemsDataFromDatabase { (item) in
+        ServerManger.loadItemsDataFromDatabase(selectedType: selectedType) { (item) in
             self.items.append(item)
             self.itemsCollectionView.reloadData()
             progressHUD.hide(animated: true)
@@ -78,13 +76,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    func selectedTypeCell(selectedType: String) {
+        loadItemsToCollectionView(selectedType: selectedType)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! itemCollectionViewCell
-        cell.backgroundColor = Config.ITEM_COLLECTION_VIEW_CELL_COLOR
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! itemCollectionViewCell
         let item = items[indexPath.row]
         cell.item = item
         return cell
@@ -105,6 +106,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showItemSeasons", sender: items[indexPath.row].id)
     }
     
     @IBAction func logOutButton(_ sender: Any) {
