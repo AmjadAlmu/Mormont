@@ -104,9 +104,18 @@ class ServerManger {
     }
     
     static func loadItemsDataFromDatabase(selectedType: String, completion: @escaping (Item) -> Void) {
-        Database.database().reference().child(selectedType).observe(.childAdded) { (snapshot) in
+        ref.child(selectedType).observe(.childAdded) { (snapshot) in
             if let dict = snapshot.value as? [String: Any] {
-                let item = Item.transformItem(dict: dict, key: snapshot.key)
+                let item = Item.transformItem(dict: dict, type: selectedType, key: snapshot.key)
+                completion(item)
+            }
+        }
+    }
+    
+    static func loadItemDetailsFromDatabase(withItem id: String, itemType: String, completion: @escaping (Item) -> Void) {
+        ref.child(itemType).child(id).observeSingleEvent(of: .value) { (snapshot) in
+            if let dict = snapshot.value as? [String: Any] {
+                let item = Item.transformItem(dict: dict, type: itemType, key: snapshot.key)
                 completion(item)
             }
         }

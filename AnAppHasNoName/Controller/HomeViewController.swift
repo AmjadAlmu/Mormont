@@ -33,7 +33,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewWillAppear(_ animated: Bool) {
         setUpMenuBar()
         setUpItemsCollectionView()
-        loadItemsToCollectionView(selectedType: Config.TV_SERIESES_ENDPOINT)
+        loadItemsToCollectionView(selectedType: Config.TV_SERIESES_ENDPOINT)//TODO: Change it based on current selected cell
     }
     
     private func setUpMenuBar() {
@@ -109,7 +109,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showItemSeasons", sender: items[indexPath.row].id)
+        performSegue(withIdentifier: "showItemSeasons", sender: (items[indexPath.row].id, items[indexPath.row].type))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let itemDetailsVC = segue.destination as? ItemDetailsController {
+            let dataToBeSent = sender as! (itemId: String, itemType: String)
+            itemDetailsVC.itemId = dataToBeSent.itemId
+            itemDetailsVC.itemType = dataToBeSent.itemType
+        }
     }
     
     @IBAction func logOutButton(_ sender: Any) {

@@ -7,7 +7,28 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HeaderCollectionReusableView: UICollectionReusableView {
-        
+    @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var itemCaptionLabel: UILabel!
+    
+    var item: Item? {
+        didSet {
+            setUpReusableView()
+        }
+    }
+    
+    func setUpReusableView() {
+        if let imageUrlString = item?.imageUrl {
+            let imageUrl = URL(string: imageUrlString)
+            itemImage.kf.setImage(with: imageUrl, placeholder: UIImage(named: "image_placeholder"))
+        }
+        itemNameLabel.text = item?.name
+        itemCaptionLabel.text = item?.caption
+    }
+    
+    
+    
 }

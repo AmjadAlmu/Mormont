@@ -305,52 +305,73 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4q9-UA-uY0">
                             <size key="itemSize" width="123" height="123"/>
-                            <size key="headerReferenceSize" width="50" height="311"/>
+                            <size key="headerReferenceSize" width="50" height="187"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SeasonCollectionViewCell" id="dF1-3p-yXN" customClass="SeasonCollectionViewCell" customModule="AnAppHasNoName" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="311" width="123" height="123"/>
+                                <rect key="frame" x="0.0" y="187" width="123" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dq-Zu-Nm3">
-                                            <rect key="frame" x="37" y="49" width="48" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="8Dq-Zu-Nm3">
+                                            <rect key="frame" x="16" y="49" width="91" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="8Dq-Zu-Nm3" secondAttribute="trailing" constant="8" id="ObG-Xs-h99"/>
+                                    <constraint firstItem="8Dq-Zu-Nm3" firstAttribute="leading" secondItem="dF1-3p-yXN" secondAttribute="leadingMargin" constant="8" id="REy-VF-qkL"/>
+                                    <constraint firstItem="8Dq-Zu-Nm3" firstAttribute="top" secondItem="dF1-3p-yXN" secondAttribute="top" constant="49" id="cz5-3e-hv6"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="seasonNumberLabel" destination="8Dq-Zu-Nm3" id="6wy-8Y-0NE"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderCollectionReusableView" id="UlA-UQ-2K5" customClass="HeaderCollectionReusableView" customModule="AnAppHasNoName" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="311"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="187"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="testing_image" translatesAutoresizingMaskIntoConstraints="NO" id="zSE-EN-nxT" customClass="im">
-                                    <rect key="frame" x="0.0" y="-64" width="375" height="375"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zSE-EN-nxT">
+                                    <rect key="frame" x="0.0" y="-67" width="375" height="254"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZh-ZA-fFh">
-                                    <rect key="frame" x="13" y="109" width="62" height="29"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZh-ZA-fFh">
+                                    <rect key="frame" x="8" y="101" width="62" height="29"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6l-5s-7ZK">
-                                    <rect key="frame" x="13" y="146" width="42" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6l-5s-7ZK">
+                                    <rect key="frame" x="8" y="136" width="359" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="zSE-EN-nxT" firstAttribute="top" secondItem="UlA-UQ-2K5" secondAttribute="top" constant="-67" id="3mj-H6-r5o"/>
+                                <constraint firstItem="DZh-ZA-fFh" firstAttribute="top" secondItem="UlA-UQ-2K5" secondAttribute="top" constant="101" id="5n0-id-oPO"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="o6l-5s-7ZK" secondAttribute="bottom" constant="22.5" id="CO4-gA-6dv"/>
+                                <constraint firstAttribute="bottom" secondItem="zSE-EN-nxT" secondAttribute="bottom" id="Crs-Ru-9XF"/>
+                                <constraint firstItem="o6l-5s-7ZK" firstAttribute="leading" secondItem="UlA-UQ-2K5" secondAttribute="leadingMargin" id="Gqq-zq-w5m"/>
+                                <constraint firstAttribute="trailing" secondItem="zSE-EN-nxT" secondAttribute="trailing" id="NUA-0g-9VN"/>
+                                <constraint firstItem="o6l-5s-7ZK" firstAttribute="top" secondItem="DZh-ZA-fFh" secondAttribute="bottom" constant="6" id="Rj5-0p-rwi"/>
+                                <constraint firstItem="DZh-ZA-fFh" firstAttribute="leading" secondItem="UlA-UQ-2K5" secondAttribute="leading" constant="8" id="ZUA-YY-nrJ"/>
+                                <constraint firstItem="zSE-EN-nxT" firstAttribute="leading" secondItem="UlA-UQ-2K5" secondAttribute="leading" id="bZl-4g-4zB"/>
+                                <constraint firstItem="o6l-5s-7ZK" firstAttribute="trailing" secondItem="UlA-UQ-2K5" secondAttribute="trailingMargin" id="pPt-yd-85C"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="itemCaptionLabel" destination="o6l-5s-7ZK" id="W4b-UA-1ll"/>
+                                <outlet property="itemImage" destination="zSE-EN-nxT" id="xXS-ec-GV0"/>
+                                <outlet property="itemNameLabel" destination="DZh-ZA-fFh" id="btU-Dc-GKw"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="PaC-Je-rgv" id="eY6-sT-HRV"/>
@@ -595,7 +616,6 @@
         <image name="password" width="50" height="50"/>
         <image name="profile" width="22" height="22"/>
         <image name="profile_selected" width="22" height="22"/>
-        <image name="testing_image" width="1200" height="630"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MhQ-C2-fc3"/>

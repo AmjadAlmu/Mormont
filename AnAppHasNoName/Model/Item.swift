@@ -21,7 +21,7 @@ class Item: NSObject {
 }
 
 extension Item {
-    static func transformItem(dict: [String: Any], key: String) -> Item {
+    static func transformItem(dict: [String: Any], type: String, key: String) -> Item {
         let item = Item()
         item.id = key
         item.name = dict["name"] as? String
@@ -30,7 +30,7 @@ extension Item {
         item.seasonsCount = dict["seasonsCount"] as? Int
         item.uid = dict["uid"] as? String
         item.date = dict["date"] as? String
-//        item.type = dict["type"] as? String
+        item.type = type
         return item
     }
 }
