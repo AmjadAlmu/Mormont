@@ -27,6 +27,12 @@ class ItemDetailsController: UICollectionViewController, UICollectionViewDelegat
         navigationController?.navigationBar.isTranslucent = false
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         loadItem()
     }

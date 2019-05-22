@@ -20,6 +20,10 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    override func awakeFromNib() {
+        addBlurEffect()
+    }
+    
     func setUpReusableView() {
         if let imageUrlString = item?.imageUrl {
             let imageUrl = URL(string: imageUrlString)
@@ -27,6 +31,16 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         }
         itemNameLabel.text = item?.name
         itemCaptionLabel.text = item?.caption
+    }
+    
+    func addBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        addSubview(blurEffectView)
+//        blurEffectView.fillSuperview()
+        self.bringSubviewToFront(itemNameLabel)
+        self.bringSubviewToFront(itemCaptionLabel)
     }
     
     
