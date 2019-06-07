@@ -17,11 +17,8 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     var item: Item? {
         didSet {
             setUpReusableView()
+            addBlurEffect()
         }
-    }
-    
-    override func awakeFromNib() {
-        addBlurEffect()
     }
     
     func setUpReusableView() {
@@ -36,9 +33,8 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     func addBlurEffect() {
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
+        blurEffectView.frame = self.frame
         addSubview(blurEffectView)
-//        blurEffectView.fillSuperview()
         self.bringSubviewToFront(itemNameLabel)
         self.bringSubviewToFront(itemCaptionLabel)
     }

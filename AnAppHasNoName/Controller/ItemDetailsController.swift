@@ -27,12 +27,6 @@ class ItemDetailsController: UICollectionViewController, UICollectionViewDelegat
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         loadItem()
     }
@@ -74,6 +68,24 @@ class ItemDetailsController: UICollectionViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 25, bottom: 50, right: 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let copyOfNameLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width - 16, height: CGFloat.greatestFiniteMagnitude))
+        copyOfNameLabel.numberOfLines = 0
+        copyOfNameLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        copyOfNameLabel.font = UIFont(name: ".SFUIDisplay-Bold", size: 24.0)
+        copyOfNameLabel.text = item.caption
+        copyOfNameLabel.sizeToFit()
+        
+        let copyOfCaptionLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width - 16, height: CGFloat.greatestFiniteMagnitude))
+        copyOfCaptionLabel.numberOfLines = 0
+        copyOfCaptionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        copyOfCaptionLabel.font = UIFont(name: ".SFUIText", size: 17.0)
+        copyOfCaptionLabel.text = item.caption
+        copyOfCaptionLabel.sizeToFit()
+        
+        return CGSize(width: collectionView.frame.width, height: copyOfNameLabel.frame.height + copyOfCaptionLabel.frame.height + 137.5)
     }
 
 }
