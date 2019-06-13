@@ -21,9 +21,8 @@ class SeasonCollectionViewCell: UICollectionViewCell {
     
     func setUpCell() {
         self.backgroundColor = Config.ITEM_COLLECTION_VIEW_CELL_COLOR
-        let seasonNumber = item?.seasonsCount ?? 0
-        
-        if cellNumber > seasonNumber && seasonNumber != 0{
+        let seasonNumber = item?.seasonsCount ?? -1
+        if cellNumber > seasonNumber && seasonNumber != -1 || seasonNumber == 0{
             seasonNumberLabel.text = "Add +"
             seasonNumberLabel.textColor = .lightGray
             seasonNumberLabel.font = .systemFont(ofSize: 25)
